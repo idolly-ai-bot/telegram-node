@@ -1,22 +1,34 @@
 const TelegramBot = require('node-telegram-bot-api');
-require("dotenv").config();
+const Filter = require('bad-words')
 const fs = require('fs');
 
-// Replace the value below with the Telegram token you receive from @BotFather
-const token = process.env.BOT_API;
+require("dotenv").config();
 
-// Create a bot that uses 'polling' to fetch new updates
+const filter = new Filter();
+const token = process.env.BOT_API;
 const bot = new TelegramBot(token, { polling: true });
 
-// Object to store custom welcome messages
+
+// 필터링 기능
+function filtering(text) {
+
+    const isFilter = filter.isProfane(text);
+
+    if (isFilter) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const welcomeMessages = {};
 
-// Function to set a welcome message for a group
+
 function setWelcome(chatId, message) {
     welcomeMessages[chatId] = message;
 }
 
-// Function to check if a user is an administrator in a chat
+
 async function isAdmin(chatId, userId) {
     try {
         const administrators = await bot.getChatAdministrators(chatId);
