@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
-const Filter = require('bad-words')
+const Filter = require('bad-words');
+const cron = require('node-cron');
 const fs = require('fs');
 
 require("dotenv").config();
@@ -10,16 +11,6 @@ const bot = new TelegramBot(token, { polling: true });
 
 
 // 필터링 기능
-function filtering(text) {
-
-    const isFilter = filter.isProfane(text);
-
-    if (isFilter) {
-        return true;
-    } else {
-        return false;
-    }
-}
 
 const welcomeMessages = {};
 
@@ -38,6 +29,11 @@ async function isAdmin(chatId, userId) {
         return false;
     }
 }
+
+function filtering(text) {
+    return filter.isProfane(text);
+}
+
 
 // Matches "/setwelcome [message]"
 bot.onText(/\/setwelcome (.+)/, async (msg, match) => {
@@ -93,11 +89,79 @@ ${welcomeMessage.replace('{username}', username)}
     });
 });
 
+
+
 // Listen for any kind of message. There are different kinds of
 // messages.
+const messageTracker = {}; // 각 사용자의 메시지 수를 추적하는 객체
+
+// Listen for any kind of message and track user message frequency
 bot.on('message', (msg) => {
     const chatId = msg.chat.id;
+    const userId = msg.from.id;
 
-    // Send a message to the chat acknowledging receipt of their message
-    bot.sendMessage(chatId, 'Received your message');
+    // Initialize message count for the user if not exists
+    if (!messageTracker[userId]) {
+        messageTracker[userId] = {
+            count: 0,
+            lastTimestamp: Date.now() // 마지막 메시지의 타임스탬프
+        };
+    }
+
+    const now = Date.now();
+    const userMessageInfo = messageTracker[userId];
+
+    // Check if 3 seconds have passed since the last message
+    if (now - userMessageInfo.lastTimestamp > 3000) {
+        // Reset message count if more than 3 seconds passed
+        userMessageInfo.count = 0;
+    }
+
+    // Increment message count and update last message timestamp
+    userMessageInfo.count++;
+    userMessageInfo.lastTimestamp = now;
+
+    // Check if message count exceeds the threshold (5 messages in 3 seconds)
+    if (userMessageInfo.count > 5) {
+        // Block user (You may implement your blocking logic here)
+        bot.kickChatMember(chatId, userId);
+        bot.sendMessage(chatId, `User ${userId} has been blocked for flooding.`);
+        
+        // You may also want to log this event or take additional actions
+        console.log(`User ${userId} has been blocked for flooding.`);
+    } else {
+        // Process the message normally
+        const messageText = msg.text;
+        if (filtering(messageText)) {
+            // 비속어가 감지되면 메시지를 차단
+            bot.deleteMessage(chatId, msg.message_id);
+            bot.sendMessage(chatId, 'Your message contains inappropriate content and has been deleted.');
+        } else {
+            // 비속어가 없으면 메시지 전송
+            bot.sendMessage(chatId, 'Received your message');
+        }
+    }
+});
+
+const messages = [
+    'Message 1',
+    'Message 2',
+    'Message 3',
+    'Message 4',
+    'Message 5'
+];
+
+// Index to keep track of current message
+let currentIndex = 0;
+
+// Schedule task to send message every 5 minutes
+cron.schedule('*/5 * * * *', () => {
+    // Get current message
+    const message = messages[currentIndex];
+    
+    // Increment index for next message (with wrap-around)
+    currentIndex = (currentIndex + 1) % messages.length;
+    
+    // Send message to all users
+    bot.sendMessage(chatId, message);
 });
