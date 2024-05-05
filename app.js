@@ -208,7 +208,8 @@ bot.on('message', async (msg) => {
             if (filtering(messageText)) {
                 // 비속어가 감지되면 메시지를 차단
                 bot.deleteMessage(chatId, msg.message_id);
-                const data = await bot.sendMessage(chatId, 'Your message contains inappropriate content and has been deleted.');
+                const data = await bot.sendMessage(chatId, `Your message contains inappropriate content and has been deleted. 
+                If you send more inappropriate content, you may be blocked.`);
                 setTimeout(() => {
                     bot.deleteMessage(chatId, data.message_id);
                 },1000)
