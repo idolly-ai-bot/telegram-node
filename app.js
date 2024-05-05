@@ -121,12 +121,12 @@ bot.on('message', async (msg) => {
     const userName = msg.from.username;
     const messageText = msg.text;
 
-    if (messageText === '/bulk') {
+    if (messageText === '/package') {
 
         const keyboard = {
             inline_keyboard: [
                 [
-                    { text: "Bulk Credit Purchase", url: "https://forms.gle/Kd9h1QLdrdT3rckF7" }
+                    { text: "elite credit pack", url: "https://forms.gle/Kd9h1QLdrdT3rckF7" }
                 ]
             ]
         };
@@ -134,7 +134,7 @@ bot.on('message', async (msg) => {
 
         // https://forms.gle/qmd2bZnFdDcbDAjd8
         const otcMessage = "For bulk credit purchase, please contact our support team.";
-        bot.sendMessage(chatId, "For bulk credit purchase, please contact our support team.", {
+        bot.sendMessage(chatId, "For purchase elite credit pack, please contact our support team.", {
             reply_markup: replyMarkup
         });
     } else if(messageText === "/link") {
@@ -142,7 +142,7 @@ bot.on('message', async (msg) => {
             inline_keyboard: [
                 [
                     { text: 'Website', url: 'https://idolly.ai' },
-                    { text: 'Discord', url: 'https://discord.gg/ajAeJ7YFNw' }
+                    { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
                 ],
                 [
                     { text: 'Twitter', url: 'https://twitter.com/idollyAI' },
