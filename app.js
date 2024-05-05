@@ -83,7 +83,7 @@ ${welcomeMessage.replace('{username}', username)}
  - Free Talking
 
  🔧 Options
- /bulk : purchase bulk credit info
+ /package : info For purchase elite credit pack
  /link : links related to our services
  /event : ongoing event
 `,
@@ -234,7 +234,7 @@ const messages = [
 let currentIndex = 0;
 
 // Schedule task to send message every 5 minutes
-cron.schedule('*/5 * * * * *', () => {
+cron.schedule('0 * * * *', () => { // Send message every hour at the beginning of the hour
     // Get current message
     const message = messages[currentIndex];
     
@@ -242,5 +242,5 @@ cron.schedule('*/5 * * * * *', () => {
     currentIndex = (currentIndex + 1) % messages.length;
     
     // Send message to all users
-    // bot.sendMessage(-1002084874193, message);
+    bot.sendMessage(-1002084874193, message);
 });
