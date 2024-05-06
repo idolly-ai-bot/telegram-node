@@ -122,6 +122,7 @@ bot.on('message', async (msg) => {
     const messageText = msg.text;
 
     if (messageText === '/package') {
+        bot.deleteMessage(chatId, msg.message_id);
 
         const keyboard = {
             inline_keyboard: [
@@ -138,6 +139,7 @@ bot.on('message', async (msg) => {
             reply_markup: replyMarkup
         });
     } else if(messageText === "/link") {
+        bot.deleteMessage(chatId, msg.message_id);
         const keyboard = {
             inline_keyboard: [
                 [
@@ -161,7 +163,7 @@ bot.on('message', async (msg) => {
         });
 
     } else if(messageText === "/event") {
-     
+        bot.deleteMessage(chatId, msg.message_id);
         bot.sendMessage(chatId, `There are no telegram events yet. There will be an event coming soon!`);
 
     } else  {
