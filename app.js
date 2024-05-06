@@ -56,7 +56,7 @@ bot.onText(/\/setwelcome (.+)/, async (msg, match) => {
 bot.on('new_chat_members', (msg) => {
     const chatId = msg.chat.id;
     const newMembers = msg.new_chat_members;
-    const welcomeMessage = welcomeMessages[chatId] || 'Welcome to the group!';
+    const welcomeMessage = welcomeMessages[chatId] || '{username} Welcome to Idolly!!!! 😁';
     const username = newMembers[0].username ? `@${newMembers[0].username}` : `(${newMembers[0].id})`;
 
     // Send image
@@ -65,10 +65,15 @@ bot.on('new_chat_members', (msg) => {
 
     bot.sendPhoto(chatId, stream, {
             caption: `
-${welcomeMessage.replace('{username}', username)}
-🔥 Everything is operated honestly
-🔥 No private sale, No presale, A fair start
-🔥 purchase elite credit pack available if you like chat /package
+Welcome to Idolly
+
+🌎 Our service generates images using AI!!
+🌎 You can create more detailed images through face transfer and mood fusion.
+🌎 You can earn points through activity and ultimately exchange them for tokens!
+
+🔥 Everything is operated honestly.
+🔥 No private sale, No presale, A fair start.
+🔥 purchase elite credit pack available if you like chat /pack
 
 ❌ Don't act like this!
  - If you plaster it, you will be kicked out.
@@ -76,20 +81,22 @@ ${welcomeMessage.replace('{username}', username)}
  - If you display inappropriate behavior, you will be expelled.
 
 ✅ Good Act
- - Clean Chat
- - Free Talking
+ - Keep the chat clean
+ - Enjoy free talking
 
  🔧 Options
- /package : info For purchase elite credit pack
- /link : links related to our services
- /event : ongoing Telegram event
+ /link : Links related to our services
+ /event : Ongoing Telegram event
+ /info : Service Information
+ /options : Our Bot Option
+ /pack : Information for purchasing the elite credit pack
 `,
             parse_mode: 'Markdown',
             reply_markup: {
                 inline_keyboard: [
                     [
                         { text: 'Website', url: 'https://idolly.ai' },
-                        { text: 'Discord', url: 'https://discord.gg/ajAeJ7YFNw' }
+                        { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
                     ],
                     [
                         { text: 'Twitter', url: 'https://twitter.com/idollyAI' },
@@ -118,7 +125,7 @@ bot.on('message', async (msg) => {
     const userName = msg.from.username;
     const messageText = msg.text;
 
-    if (messageText === '/package') {
+    if (messageText === '/pack') {
         bot.deleteMessage(chatId, msg.message_id);
 
         const keyboard = {
@@ -131,7 +138,6 @@ bot.on('message', async (msg) => {
         const replyMarkup = JSON.stringify(keyboard);
 
         // https://forms.gle/qmd2bZnFdDcbDAjd8
-        const otcMessage = "For bulk credit purchase, please contact our support team.";
         bot.sendMessage(chatId, "For purchase elite credit pack, please contact our support team.", {
             reply_markup: replyMarkup
         });
@@ -163,7 +169,33 @@ bot.on('message', async (msg) => {
         bot.deleteMessage(chatId, msg.message_id);
         bot.sendMessage(chatId, `There are no telegram events yet. There will be an event coming soon!`);
 
-    } else  {
+    } else if(messageText === "/info") {
+        bot.sendMessage(chatId, `
+SERVICE INFORMATION
+
+✅ Our service generates images using AI!!
+
+✅ You can create more detailed images through face transfer and mood fusion.
+
+✅ You can earn points through activity and ultimately exchange them for tokens!
+        `);
+
+
+    } else if(messageText === "/option") {
+        bot.deleteMessage(chatId, msg.message_id);
+        bot.sendMessage(chatId,`
+        🔧 Options
+
+/pack : Information for purchasing the elite credit pack
+
+/link : Links related to our services
+
+/event : Ongoing Telegram event
+
+/info : Service Information
+       `);
+
+    }else  {
          // Initialize message count for the user if not exists
         if (!messageTracker[userId]) {
             messageTracker[userId] = {
