@@ -71,7 +71,7 @@ bot.on('new_chat_members', (msg) => {
 ${welcomeMessage.replace('{username}', username)}
 🔥 Everything is operated honestly
 🔥 No private sale, No presale, A fair start
-🔥 purchase Doll bulk credit available if you like chat /bulk
+🔥 purchase elite credit pack available if you like chat /package
 
 ❌ Don't act like this!
  - If you plaster it, you will be kicked out.
