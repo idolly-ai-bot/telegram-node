@@ -162,9 +162,7 @@ bot.on('message', async (msg) => {
 
     } else if(messageText === "/event") {
      
-        bot.sendMessage(chatId, `There are no events yet. There will be an event coming soon!`);
-
-    } else if(messageText === "/link") {
+        bot.sendMessage(chatId, `There are no telegram events yet. There will be an event coming soon!`);
 
     } else  {
          // Initialize message count for the user if not exists
@@ -223,25 +221,25 @@ bot.on('message', async (msg) => {
    
 });
 
-const messages = [
-    'Message 1',
-    'Message 2',
-    'Message 3',
-    'Message 4',
-    'Message 5'
-];
+
 
 // Index to keep track of current message
-let currentIndex = 0;
-
-// Schedule task to send message every 5 minutes
-cron.schedule('0 * * * *', () => { // Send message every hour at the beginning of the hour
-    // Get current message
-    const message = messages[currentIndex];
+// // Schedule task to send message every 5 minutes
+// const messages = [
+//     'Message 1',
+//     'Message 2',
+//     'Message 3',
+//     'Message 4',
+//     'Message 5'
+// ];
+// let currentIndex = 0;
+// cron.schedule('0 * * * *', () => { // Send message every hour at the beginning of the hour
+//     // Get current message
+//     const message = messages[currentIndex];
     
-    // Increment index for next message (with wrap-around)
-    currentIndex = (currentIndex + 1) % messages.length;
+//     // Increment index for next message (with wrap-around)
+//     currentIndex = (currentIndex + 1) % messages.length;
     
-    // Send message to all users
-    bot.sendMessage(-1002084874193, message);
-});
+//     // Send message to all users
+//     bot.sendMessage(-1002084874193, message);
+// });
