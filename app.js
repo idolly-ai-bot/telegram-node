@@ -67,7 +67,7 @@ bot.on('new_chat_members', (msg) => {
             caption: `
 Welcome to Idolly
 
-🌎 You can create more detailed images through face transfer and mood fusion.
+🌎 With Face Transfer and Mood Fusion, you can easily create the image you want.
 
 🔥 Everything is operated honestly.
 🔥 No private sale, No presale, A fair start.
