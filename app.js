@@ -67,9 +67,7 @@ bot.on('new_chat_members', (msg) => {
             caption: `
 Welcome to Idolly
 
-🌎 Our service generates images using AI!!
 🌎 You can create more detailed images through face transfer and mood fusion.
-🌎 You can earn points through activity and ultimately exchange them for tokens!
 
 🔥 Everything is operated honestly.
 🔥 No private sale, No presale, A fair start.
@@ -79,10 +77,6 @@ Welcome to Idolly
  - If you plaster it, you will be kicked out.
  - No profanity, no advertising
  - If you display inappropriate behavior, you will be expelled.
-
-✅ Good Act
- - Keep the chat clean
- - Enjoy free talking
 
  🔧 Options
  /link : Links related to our services
