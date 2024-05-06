@@ -82,7 +82,7 @@ Welcome to Idolly
  /link : Links related to our services
  /event : Ongoing Telegram event
  /info : Service Information
- /options : Our Bot Option
+ /option : Our Bot Option
  /pack : Information for purchasing the elite credit pack
 `,
             parse_mode: 'Markdown',
@@ -179,7 +179,7 @@ SERVICE INFORMATION
     } else if(messageText === "/option") {
         bot.deleteMessage(chatId, msg.message_id);
         bot.sendMessage(chatId,`
-        🔧 Options
+        🔧 Option
 
 /pack : Information for purchasing the elite credit pack
 
