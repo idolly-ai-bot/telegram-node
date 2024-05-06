@@ -164,6 +164,7 @@ bot.on('message', async (msg) => {
         bot.sendMessage(chatId, `There are no telegram events yet. There will be an event coming soon!`);
 
     } else if(messageText === "/info") {
+        bot.deleteMessage(chatId, msg.message_id);
         bot.sendMessage(chatId, `
 SERVICE INFORMATION
 
