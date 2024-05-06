@@ -85,7 +85,7 @@ ${welcomeMessage.replace('{username}', username)}
  🔧 Options
  /package : info For purchase elite credit pack
  /link : links related to our services
- /event : ongoing event
+ /event : ongoing Telegram event
 `,
             parse_mode: 'Markdown',
             reply_markup: {
