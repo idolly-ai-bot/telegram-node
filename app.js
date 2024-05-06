@@ -60,13 +60,10 @@ bot.on('new_chat_members', (msg) => {
     const username = newMembers[0].username ? `@${newMembers[0].username}` : `(${newMembers[0].id})`;
 
     // Send image
-    const imageFilePath = 'images/Option1.png'; // Path to your image
-    fs.readFile(imageFilePath, async (err, data) => {
-        if (err) {
-            console.error('Error reading image file:', err);
-            return;
-        }
-        const sendMessage = await bot.sendPhoto(chatId, data, {
+    const imageFilePath = './images/Option1.png'; // Path to your image
+    const stream = fs.createReadStream(imageFilePath);
+
+    bot.sendPhoto(chatId, stream, {
             caption: `
 ${welcomeMessage.replace('{username}', username)}
 🔥 Everything is operated honestly
@@ -105,7 +102,7 @@ ${welcomeMessage.replace('{username}', username)}
                 ]
             }
         });
-    });
+
 });
 
 
