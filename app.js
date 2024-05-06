@@ -60,7 +60,7 @@ bot.on('new_chat_members', (msg) => {
     const username = newMembers[0].username ? `@${newMembers[0].username}` : `(${newMembers[0].id})`;
 
     // Send image
-    const imageFilePath = './images/Option1.png'; // Path to your image
+    const imageFilePath = './images/Option3.png'; // Path to your image
     const stream = fs.createReadStream(imageFilePath);
 
     bot.sendPhoto(chatId, stream, {
