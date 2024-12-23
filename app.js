@@ -199,7 +199,7 @@ SERVICE INFORMATION
 /info : Service Information
        `);
 
-    } else if(messageText === "notice") {
+    } else if(messageText === "/notice") {
         const imageFilePath = './images/Option3.png'; 
         const stream = fs.createReadStream(imageFilePath);
     
