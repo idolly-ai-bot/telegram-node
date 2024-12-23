@@ -52,59 +52,68 @@ bot.onText(/\/setwelcome (.+)/, async (msg, match) => {
     bot.sendMessage(chatId, 'Welcome message set successfully!');
 });
 
-// Listen for new users joining a group
-bot.on('new_chat_members', (msg) => {
+
+bot.on('new_chat_members', async (msg) => {
     const chatId = msg.chat.id;
-    const newMembers = msg.new_chat_members;
-    const welcomeMessage = welcomeMessages[chatId] || '{username} Welcome to Idolly!!!! 😁';
-    const username = newMembers[0].username ? `@${newMembers[0].username}` : `(${newMembers[0].id})`;
+    const messageId = msg.message_id;
 
-    // Send image
-    const imageFilePath = './images/Option3.png'; // Path to your image
-    const stream = fs.createReadStream(imageFilePath);
+    await bot.deleteMessage(chatId, messageId);
+})
 
-    bot.sendPhoto(chatId, stream, {
-            caption: `
-Welcome to Idolly
 
-🌎 With Face Transfer and Mood Fusion, you can easily create the image you want.
+// Listen for new users joining a group
+// bot.on('new_chat_members', (msg) => {
+//     const chatId = msg.chat.id;
+//     const newMembers = msg.new_chat_members;
+//     const welcomeMessage = welcomeMessages[chatId] || '{username} Welcome to Idolly!!!! 😁';
+//     const username = newMembers[0].username ? `@${newMembers[0].username}` : `(${newMembers[0].id})`;
 
-🔥 Everything is operated honestly.
-🔥 No private sale, No presale, A fair start.
-🔥 purchase elite credit pack available if you like chat /pack
+//     // Send image
+//     const imageFilePath = './images/Option3.png'; // Path to your image
+//     const stream = fs.createReadStream(imageFilePath);
 
-❌ Don't act like this!
- - If you plaster it, you will be kicked out.
- - No profanity, no advertising
- - If you display inappropriate behavior, you will be expelled.
+//     bot.sendPhoto(chatId, stream, {
+//             caption: `
+// Welcome to Idolly
 
- 🔧 Options
- /link : Links related to our services
- /event : Ongoing Telegram event
- /info : Service Information
- /option : Our Bot Option
- /pack : Information for purchasing the elite credit pack
-`,
-            parse_mode: 'Markdown',
-            reply_markup: {
-                inline_keyboard: [
-                    [
-                        { text: 'Website', url: 'https://idolly.ai' },
-                        { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
-                    ],
-                    [
-                        { text: 'Twitter', url: 'https://twitter.com/idollyAI' },
-                        { text: 'Instagram', url: 'https://www.instagram.com/idolly.ai' }
-                    ],
-                    [
-                        { text: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61557844051238' },
-                        { text: 'Medium', url: 'https://medium.com/@idollymarketing' }
-                    ],
-                ]
-            }
-        });
+// 🌎 With Face Transfer and Mood Fusion, you can easily create the image you want.
 
-});
+// 🔥 Everything is operated honestly.
+// 🔥 No private sale, No presale, A fair start.
+// 🔥 purchase elite credit pack available if you like chat /pack
+
+// ❌ Don't act like this!
+//  - If you plaster it, you will be kicked out.
+//  - No profanity, no advertising
+//  - If you display inappropriate behavior, you will be expelled.
+
+//  🔧 Options
+//  /link : Links related to our services
+//  /event : Ongoing Telegram event
+//  /info : Service Information
+//  /option : Our Bot Option
+//  /pack : Information for purchasing the elite credit pack
+// `,
+//             parse_mode: 'Markdown',
+//             reply_markup: {
+//                 inline_keyboard: [
+//                     [
+//                         { text: 'Website', url: 'https://idolly.ai' },
+//                         { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
+//                     ],
+//                     [
+//                         { text: 'Twitter', url: 'https://twitter.com/idollyAI' },
+//                         { text: 'Instagram', url: 'https://www.instagram.com/idolly.ai' }
+//                     ],
+//                     [
+//                         { text: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61557844051238' },
+//                         { text: 'Medium', url: 'https://medium.com/@idollymarketing' }
+//                     ],
+//                 ]
+//             }
+//         });
+
+// });
 
 
 
