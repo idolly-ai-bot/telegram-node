@@ -153,7 +153,7 @@ bot.on('message', async (msg) => {
                     { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
                 ],
                 [
-                    { text: 'Twitter', url: 'https://twitter.com/idollyAI' },
+                    { text: 'Twitter', url: 'https://x.com/idolly_AI' },
                     { text: 'Instagram', url: 'https://www.instagram.com/idolly.ai' }
                 ],
                 [
