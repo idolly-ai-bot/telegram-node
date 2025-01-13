@@ -34,6 +34,12 @@ function filtering(text) {
     return filter.isProfane(text);
 }
 
+function containsLink(text) {\
+    const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
+    return urlRegex.test(text);
+}
+
+
 
 // Matches "/setwelcome [message]"
 bot.onText(/\/setwelcome (.+)/, async (msg, match) => {
@@ -127,6 +133,20 @@ bot.on('message', async (msg) => {
     const userId = msg.from.id;
     const userName = msg.from.username;
     const messageText = msg.text;
+
+
+    if (containsLink(messageText)) {
+        bot.deleteMessage(chatId, msg.message_id);
+        const warningMessage = await bot.sendMessage(
+            chatId,
+            `Links are not allowed in this chat. Your message has been deleted.`
+        );
+
+        setTimeout(() => {
+            bot.deleteMessage(chatId, warningMessage.message_id);
+        }, 3000); 
+        return;
+    }
 
     if (messageText === '/pack') {
         bot.deleteMessage(chatId, msg.message_id);
