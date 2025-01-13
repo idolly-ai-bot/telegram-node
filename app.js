@@ -144,7 +144,7 @@ bot.on('message', async (msg) => {
 
         setTimeout(() => {
             bot.deleteMessage(chatId, warningMessage.message_id);
-        }, 1500); 
+        }, 2000); 
         return;
     }
 
