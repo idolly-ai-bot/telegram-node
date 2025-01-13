@@ -34,7 +34,7 @@ function filtering(text) {
     return filter.isProfane(text);
 }
 
-function containsLink(text) {\
+function containsLink(text) {
     const urlRegex = /(https?:\/\/[^\s]+)|(www\.[^\s]+)/gi;
     return urlRegex.test(text);
 }
