@@ -136,16 +136,20 @@ bot.on('message', async (msg) => {
 
 
     if (containsLink(messageText)) {
-        bot.deleteMessage(chatId, msg.message_id);
-        const warningMessage = await bot.sendMessage(
-            chatId,
-            `Links are not allowed in this chat. Your message has been deleted.`
-        );
+        const isAdministrator = await isAdmin(chatId, userId);
+        if (!isAdministrator) {
+            bot.deleteMessage(chatId, msg.message_id);
+            const warningMessage = await bot.sendMessage(
+                chatId,
+                `Links are not allowed in this chat unless you are an administrator. Your message has been deleted.`
+            );
 
-        setTimeout(() => {
-            bot.deleteMessage(chatId, warningMessage.message_id);
-        }, 2000); 
-        return;
+            // 경고 메시지 일정 시간 후 삭제
+            setTimeout(() => {
+                bot.deleteMessage(chatId, warningMessage.message_id);
+            }, 5000); // 5초 후 삭제
+            return;
+        }
     }
 
     if (messageText === '/pack') {
