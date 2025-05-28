@@ -224,6 +224,8 @@ SERVICE INFORMATION
        `);
 
     } else if(messageText === "/notice") {
+        bot.deleteMessage(chatId, msg.message_id);
+
         const imageFilePath = './images/Option3.png'; 
         const stream = fs.createReadStream(imageFilePath);
     
