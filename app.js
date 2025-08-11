@@ -234,7 +234,7 @@ SERVICE INFORMATION
 
         bot.sendMessage(chatId, "Campaign will be launched soon")
 
-    } else if(messageText === "/test") {
+    } else if(messageText === "/welcome") {
         bot.deleteMessage(chatId, msg.message_id);
 
         const imageFilePath = './images/idolly-ai-banner.png'; 
