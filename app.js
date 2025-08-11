@@ -231,6 +231,62 @@ SERVICE INFORMATION
     
         bot.sendPhoto(chatId, stream, {
                 caption: `
+<b>Welcome to IdollyAI 💕</b>
+
+IdollyAI is an <b>idol-to-Earn (I2E)</b> platform where you can create and nurture your own idol using AI agent technology, trade minted NFT idols as liquid tokens through NFT customization, and generate income through influencer activities.
+
+<blockquote>
+⭐️ All operations are carried out transparently and honestly, with a fair token launch.
+
+⭐️ Type /pack in the chat to purchase the Elite Credit Pack.
+
+⭐️ Elite Pack buyers will receive priority whitelist access during the presale and a limited-edition NFT.
+</blockquote>
+
+<blockquote>
+❌ <b>Don’t do this!</b>
+
+🟢 Spamming will result in removal.
+🟢 No profanity or promotion of other projects.
+🟢 Inappropriate behavior will lead to expulsion.
+</blockquote>
+
+<blockquote>
+🔩  <b>Options</b>
+
+/link : Links related to our services
+/campaign: Ongoing Telegram campaign
+/info : Service information
+/option : Bot options
+/pack : Information on purchasing the Elite Credit Pack
+</blockquote>
+  `.trim(),
+  parse_mode: 'HTML',
+                reply_markup: {
+                    inline_keyboard: [
+                        [
+                            { text: 'Website', url: 'https://idolly.ai' },
+                            { text: 'Discord', url: 'https://discord.gg/H3Msa8ZwVJ' }
+                        ],
+                        [
+                            { text: 'Twitter', url: 'https://x.com/idolly_AI' },
+                            { text: 'Instagram', url: 'https://www.instagram.com/idolly.ai' }
+                        ],
+                        [
+                            { text: 'Facebook', url: 'https://www.facebook.com/profile.php?id=61557844051238' },
+                            { text: 'Medium', url: 'https://medium.com/@idollymarketing' }
+                        ],
+                    ]
+                }
+            });
+    } else if(messageText === "/test") {
+        bot.deleteMessage(chatId, msg.message_id);
+
+        const imageFilePath = './images/Option3.png'; 
+        const stream = fs.createReadStream(imageFilePath);
+    
+        bot.sendPhoto(chatId, stream, {
+                caption: `
     Welcome to Idolly
     
     🌎 With Face Transfer and Mood Fusion, you can easily create the image you want.
@@ -323,7 +379,6 @@ SERVICE INFORMATION
 
     }
 
-   
 });
 
 
