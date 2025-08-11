@@ -370,7 +370,7 @@ IdollyAI is an <b>idol-to-Earn (I2E)</b> platform where you can create and nurtu
 // });
 
 
-cron.schedule('0 9 * * *', () => {
+cron.schedule('0 0 * * *', () => {
     const chatId = -1002084874193
 
     const imageFilePath = './images/idolly-ai-banner.png'; 
